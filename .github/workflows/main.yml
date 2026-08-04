@@ -13,17 +13,18 @@ jobs:
          id-token: write
       steps:
          - name: Checkout from repo
-           uses: actions/checkout@v2
-
-         - name: Install dependencies
-           run: npm install
+           uses: actions/checkout@v4
 
          - name: publish to registry
-           uses: actions/setup-node@v2
+           uses: actions/setup-node@v4
            with:
               node-version: 20
               registry-url: "https://npm.pkg.github.com"
               scope: "@twistedlogixph"
+
+         - name: Install dependencies
+           run: npm install
+
          - run: npm publish
            env:
               NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
