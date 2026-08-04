@@ -1,0 +1,37 @@
+{
+   "name": "@twistedlogixph/nest-rbac-module",
+   "version": "0.0.1",
+   "main": "dist/index.js",
+   "publishConfig": {
+      "registry": "https://npm.pkg.github.com/@twistedlogixph"
+   },
+   "files": [
+      "dist"
+   ],
+   "scripts": {
+      "build": "rimraf dist && tsc",
+      "prepublish": "npm run build"
+   },
+   "author": "TwistedLogix PH",
+   "license": "UNLICENSED",
+   "description": "Nestjs RBAC Permissions Module",
+   "dependencies": {
+      "@casl/ability": "^7.0.1",
+      "@nestjs/cache-manager": "^3.0.1",
+      "@nestjs/common": "^11.1.0",
+      "@nestjs/config": "^4.0.2",
+      "@twistedlogixph/redis-cache-module": "0.0.1-2",
+      "express": "^5.2.1",
+      "reflect-metadata": "^0.2.2",
+      "rxjs": "^7.8.2"
+   },
+   "devDependencies": {
+      "@types/node": "^22.15.17",
+      "eslint": "^9.25.1",
+      "eslint-config-prettier": "^10.1.2",
+      "eslint-plugin-prettier": "^5.2.6",
+      "prettier": "^3.5.3",
+      "rimraf": "^6.0.1",
+      "typescript": "^5.8.3"
+   }
+}

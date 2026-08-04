@@ -1,0 +1,29 @@
+name: nest-rbac-module
+on:
+   push:
+      branches:
+         - main
+jobs:
+   build:
+      runs-on: ubuntu-latest
+      permissions:
+         contents: read
+         packages: write
+         attestations: write
+         id-token: write
+      steps:
+         - name: Checkout from repo
+           uses: actions/checkout@v2
+
+         - name: Install dependencies
+           run: npm install
+
+         - name: publish to registry
+           uses: actions/setup-node@v2
+           with:
+              node-version: 20
+              registry-url: "https://npm.pkg.github.com"
+              scope: "@twistedlogixph"
+         - run: npm publish
+           env:
+              NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
