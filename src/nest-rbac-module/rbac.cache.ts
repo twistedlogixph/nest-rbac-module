@@ -23,12 +23,12 @@ export class RbacCache {
    async getByRoleId(roleId: number): Promise<RoleCache> {
       const key = this.toKey(roleId);
       const role = await this.permissionCacheService.get(key);
-      if (!role) {
-         this.logger.error(`Role with ID ${roleId} not found in cache.`);
-         throw new Error(
-            `Unable to retrieve role and permission settings. Please contact the system administrator.`,
-         );
-      }
+      // if (!role) {
+      //    this.logger.error(`Role with ID ${roleId} not found in cache.`);
+      //    throw new Error(
+      //       `Unable to retrieve role and permission settings. Please contact the system administrator.`,
+      //    );
+      // }
       return role;
    }
 }

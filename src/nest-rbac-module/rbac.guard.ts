@@ -30,6 +30,11 @@ export class RbacGuard implements CanActivate {
       const ctx = context.switchToHttp();
       const req = ctx.getRequest();
       const { role } = req;
+      if (!role) {
+         throw new ForbiddenException(
+            `Unable to retrieve permission settings. Please contact the system administrator.`,
+         );
+      }
       const ability = this.abilityFactory.defineAbility(role);
       try {
          ForbiddenError.from(ability).throwUnlessCan(
