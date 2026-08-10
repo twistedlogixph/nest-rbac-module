@@ -27,9 +27,7 @@ export class RbacMiddleware implements NestMiddleware {
       }
 
       const { customParams } = auth;
-      console.log("customParams:", customParams);
       const role = await this.rbacCache.getByRoleId(customParams?.roleId);
-      console.log("role:", role);
       req.role = role;
       next();
    }
