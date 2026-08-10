@@ -1,6 +1,6 @@
 {
    "name": "@twistedlogixph/nest-rbac-module",
-   "version": "0.0.2",
+   "version": "0.0.2-1",
    "main": "dist/index.js",
    "publishConfig": {
       "registry": "https://npm.pkg.github.com/@twistedlogixph"
@@ -22,6 +22,7 @@
       "@nestjs/config": "^4.0.2",
       "@twistedlogixph/redis-cache-module": "0.0.3",
       "express": "^5.2.1",
+      "jsonwebtoken": "^9.0.3",
       "reflect-metadata": "^0.2.2",
       "rxjs": "^7.8.2"
    },
