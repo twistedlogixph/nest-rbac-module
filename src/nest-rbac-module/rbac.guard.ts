@@ -6,6 +6,7 @@ import {
    CanActivate,
    ExecutionContext,
    ForbiddenException,
+   Logger,
 } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
 import { RbacMetaData } from "./interface";
@@ -13,6 +14,7 @@ import { RBAC_METADATA_KEY } from "./constants";
 
 @Injectable()
 export class RbacGuard implements CanActivate {
+   private readonly logger = new Logger(RbacGuard.name);
    constructor(
       private reflector: Reflector,
       private readonly abilityFactory: AbilityFactory,
@@ -44,6 +46,9 @@ export class RbacGuard implements CanActivate {
          return true;
       } catch (error) {
          if (error instanceof ForbiddenError) {
+            this.logger.error(
+               `Forbidden resource: resource: ${requirement.resource}, action: ${requirement.action}`,
+            );
             throw new ForbiddenException(
                `Your role is not permitted to perform this action.`,
             );
