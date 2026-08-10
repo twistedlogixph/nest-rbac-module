@@ -1,9 +1,9 @@
 import { Ability, AbilityBuilder, AbilityClass } from "@casl/ability";
 import { Injectable } from "@nestjs/common";
-import { AppActions, AppAbility, RbacConfig, RoleCache } from "./interface";
-import { AppSubjects } from "src/nest-rbac-module/interface";
+import { AppActions, AppAbility, RbacConfig, RoleCache } from "../interface";
+import { AppSubjects } from "../interface";
 import { ConfigService } from "@nestjs/config";
-import { RBAC_CONFIG_KEY } from "./constants";
+import { RBAC_CONFIG_KEY } from "../constants";
 @Injectable()
 export class AbilityFactory {
    constructor(private readonly configService: ConfigService) {}

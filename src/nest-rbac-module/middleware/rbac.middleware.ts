@@ -5,7 +5,7 @@ import {
    NestMiddleware,
    UnauthorizedException,
 } from "@nestjs/common";
-import { RbacCache } from "./rbac.cache";
+import { RbacCache } from "../rbac.cache";
 
 /**
  * wraps all request with this middleware to identity role of currently logged-in user
@@ -25,8 +25,11 @@ export class RbacMiddleware implements NestMiddleware {
             ),
          );
       }
+
       const { customParams } = auth;
+      console.log("customParams:", customParams);
       const role = await this.rbacCache.getByRoleId(customParams?.roleId);
+      console.log("role:", role);
       req.role = role;
       next();
    }

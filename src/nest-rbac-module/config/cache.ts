@@ -1,4 +1,3 @@
-import { RedisCacheConfig } from "@twistedlogixph/redis-cache-module";
 import { InternalServerErrorException } from "@nestjs/common";
 import { registerAs } from "@nestjs/config";
 import { RBAC_CACHE_CONFIG_KEY } from "../constants";
@@ -20,10 +19,10 @@ if (!cacheDb) {
 }
 
 export default registerAs(RBAC_CACHE_CONFIG_KEY, () => {
-   const conf: RedisCacheConfig = {
+   const conf: any = {
       host: cacheHost,
       port: +process.env.RBAC_CACHE_PORT || 6379,
-      ttl: process.env.RBAC_CACHE_TTL ? +process.env.RBAC_CACHE_TTL : -1,
+      ttl: process.env.RBAC_CACHE_TTL ? +process.env.RBAC_CACHE_TTL : 0,
       authPass: process.env.RBAC_CACHE_AUTHPASS,
       db: cacheDb,
    };

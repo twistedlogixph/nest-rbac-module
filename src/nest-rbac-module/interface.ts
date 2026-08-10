@@ -44,4 +44,30 @@ interface RoleCache {
    deletedAt?: Date;
 }
 
-export type { AppAbility, AppSubjects, RbacMetaData, RbacConfig, RoleCache };
+interface TokenPayload {
+   roleId: number;
+}
+interface TokenAuth {
+   userid: string | number;
+   scope: string;
+   appId: string;
+   customParams: TokenPayload;
+}
+
+interface JwtVerifyConf {
+   publicKey: string;
+   iss: string;
+   sub: string;
+   aud: string;
+}
+
+export type {
+   AppAbility,
+   AppSubjects,
+   RbacMetaData,
+   RbacConfig,
+   RoleCache,
+   TokenPayload,
+   TokenAuth,
+   JwtVerifyConf,
+};
