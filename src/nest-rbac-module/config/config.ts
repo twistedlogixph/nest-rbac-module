@@ -7,6 +7,7 @@ require("dotenv").config();
 const rbacServiceName = process.env.RBAC_SERVICE_NAME;
 const cacheKey = process.env.RBAC_ROLE_KEY;
 const cacheConnectionName = process.env.RBAC_CACHE_CONNECTION_NAME;
+const integrationScopes = process.env.RBAC_INTEGRATION_SCOPES;
 if (!rbacServiceName) {
    throw new InternalServerErrorException(
       "Missing environment variable: RBAC_SERVICE_NAME",
@@ -22,12 +23,17 @@ if (!cacheConnectionName) {
       "Missing environment variable: RBAC_CACHE_CONNECTION_NAME",
    );
 }
+if (!integrationScopes) {
+   throw new InternalServerErrorException(
+      "Missing environment variable: RBAC_INTEGRATION_SCOPES",
+   );
+}
 export default registerAs(RBAC_CONFIG_KEY, () => {
    const conf: RbacConfig = {
       serviceName: rbacServiceName,
       cacheKey,
       cacheConnectionName,
-      integrationScopes: process.env.RBAC_INTEGRATION_SCOPES.split(","),
+      integrationScopes: integrationScopes.split(","),
    };
    return conf;
 });
