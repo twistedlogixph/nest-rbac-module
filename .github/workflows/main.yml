@@ -1,40 +1,41 @@
 name: nest-rbac-module
+
 on:
-   push:
-      tags:
-         - '*'
+  push:
+    tags:
+      - '*'
+
 jobs:
-   build:
-      runs-on: ubuntu-latest
-      permissions:
-         contents: read
-         packages: write
-         attestations: write
-         id-token: write
-      steps:
-         - name: Checkout from repo
-           uses: actions/checkout@v4
+  build:
+    runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      packages: write
 
-         - name: Install dependencies
-           run: npm install
-           env:
-              NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
- 
+    steps:
+      - name: Checkout from repo
+        uses: actions/checkout@v4
 
-         - name: Set release version
-           run: npm version "${GITHUB_REF_NAME#v}" --no-git-tag-version
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://npm.pkg.github.com
+          scope: '@twistedlogixph'
 
-         - name: Build package
-           run: npm run build
+      - name: Install dependencies
+        run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
 
-         - name: publish to registry
-           uses: actions/setup-node@v4
-           with:
-              node-version: 20
-              registry-url: "https://npm.pkg.github.com"
-              scope: "@twistedlogixph"
+      - name: Set release version
+        run: npm version "${GITHUB_REF_NAME#v}" --no-git-tag-version
 
-         - run: npm publish
-           env:
-              NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+      - name: Build package
+        run: npm run build
+
+      - name: Publish package
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
