@@ -12,6 +12,7 @@ declare global {
    namespace Express {
       interface Request {
          role: RoleCache;
+         auth: TokenAuth;
       }
    }
 }
@@ -30,6 +31,7 @@ interface RbacConfig {
    serviceName: string;
    cacheKey: string;
    cacheConnectionName: string;
+   integrationScopes?: string[];
 }
 
 interface RoleCache {
@@ -41,6 +43,7 @@ interface RoleCache {
    superadmin: boolean;
    navSections: any;
    isIntegration: boolean;
+   integrationScope: string;
    deletedAt?: Date;
 }
 

@@ -27,6 +27,7 @@ export default registerAs(RBAC_CONFIG_KEY, () => {
       serviceName: rbacServiceName,
       cacheKey,
       cacheConnectionName,
+      integrationScopes: process.env.RBAC_INTEGRATION_SCOPES.split(","),
    };
    return conf;
 });
